@@ -7,17 +7,17 @@ echo "Creating user $user for databases loaded from $url"
 echo "Adding data into MySQL"
 /usr/sbin/mysqld &
 sleep 5
-curl $url -o import.sql
+
 
 # Fixing some phpmysqladmin export problems
-sed -ri.bak 's/-- Database: (.*?)/CREATE DATABASE \1;\nUSE \1;/g' import.sql
+sed -ri.bak 's/-- Database: (.*?)/CREATE DATABASE \1;\nUSE \1;/g' database.sql
 
 # Fixing some mysqldump export problems (when run without --databases switch)
 # This is not tested so far
 # if grep -q "CREATE DATABASE" import.sql; then :; else sed -ri.bak 's/-- MySQL dump/CREATE DATABASE `database_1`;\nUSE `database_1`;\n-- MySQL dump/g' import.sql; fi
 
 mysql --default-character-set=utf8 < import.sql
-rm import.sql
+rm database.sql
 mysqladmin shutdown
 echo "finished"
 
