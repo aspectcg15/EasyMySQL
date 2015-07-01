@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-MAINTAINER Nane Kratzke
+MAINTAINER Morgan Commons morgan.commons@aspect.com
 
 # Install latest updates
 RUN apt-get update
@@ -17,10 +17,10 @@ RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysq
 ADD ./database.sql /var/db/database.sql
 
 # Set Standard settings
-ENV user student
-ENV password secret
+ENV user root
+ENV password aspect2015
 ENV url file:/var/db/database.sql
-ENV right READ
+ENV right WRITE
 
 # Install starting script
 ADD ./start-database.sh /usr/local/bin/start-database.sh
