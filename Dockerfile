@@ -2,6 +2,9 @@ FROM ubuntu:latest
 
 MAINTAINER Morgan Commons morgan.commons@aspect.com
 
+#Add values to prevent error: 'Could not resolve archive.ubuntu.com'
+ADD 91.189.88.46 archive.ubuntu.com /etc/hosts
+ADD 91.189.88.46 security.ubuntu.com /etc/hosts
 # Install latest updates
 RUN apt-get update
 RUN apt-get upgrade -y
